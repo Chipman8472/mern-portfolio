@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container { @apply max-w-5xl mx-auto px-4; }
+.section { @apply py-16; }
+.h1 { @apply text-4xl font-bold tracking-tight; }
+.h2 { @apply text-2xl font-semibold; }
+.card { @apply rounded-2xl shadow-sm bg-white border; }
+.btn { @apply inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition; }

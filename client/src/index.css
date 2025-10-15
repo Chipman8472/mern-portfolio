@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand: #2563eb;
+}
+a { color: var(--brand); }
+.container { /* Tailwind helper classes are applied via @apply where needed */ }
+.section { /* spacing handled in components */ }
+.h1 { /* semantic sizes handled via tailwind in components */ }
+.h2 { /* reserved */ }
+.card { /* reserved */ }
+.btn { /* reserved */ }
