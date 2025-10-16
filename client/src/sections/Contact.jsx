@@ -6,7 +6,7 @@ export default function Contact() {
 
   const onChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }))
 
-  const onSubmit = async (e) => {
+  const onSubmit = async e => {
     e.preventDefault()
     setStatus('sending')
     try {
@@ -24,19 +24,70 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="section bg-white">
-      <div className="container">
-        <h2 className="h1">Contact</h2>
-        <form className="mt-6 grid gap-4 max-w-xl" onSubmit={onSubmit}>
-          <input className="border rounded-xl p-3" name="name" placeholder="Name" value={form.name} onChange={onChange} required />
-          <input className="border rounded-xl p-3" type="email" name="email" placeholder="Email" value={form.email} onChange={onChange} required />
-          <input className="border rounded-xl p-3" name="subject" placeholder="Subject" value={form.subject} onChange={onChange} />
-          <textarea className="border rounded-xl p-3 min-h-[120px]" name="body" placeholder="Message" value={form.body} onChange={onChange} required />
-          <button className="btn w-fit" disabled={status==='sending'}>Send</button>
-          {status==='ok' && <p className="text-green-600">Thanks! I’ll get back to you soon.</p>}
-          {status==='error' && <p className="text-red-600">Something went wrong. Try again.</p>}
+    <section id="contact" className="section bg-transparent relative">
+      <div className="container relative z-10">
+        <h2 className="h1 text-white">Contact</h2>
+        <p className="mt-2 text-gray-300 max-w-xl">
+          Have a question, project idea, or collaboration in mind? 
+          Send me a message below — I’ll get back to you soon.
+        </p>
+
+        <form
+          onSubmit={onSubmit}
+          className="mt-8 grid gap-4 max-w-xl bg-black/30 border border-white/10 p-6 rounded-2xl backdrop-blur-sm shadow-glow"
+        >
+          <input
+            className="border border-white/10 bg-white/5 text-gray-100 placeholder:text-gray-400 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-space-accent"
+            name="name"
+            placeholder="Your Name"
+            value={form.name}
+            onChange={onChange}
+            required
+          />
+          <input
+            type="email"
+            className="border border-white/10 bg-white/5 text-gray-100 placeholder:text-gray-400 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-space-accent"
+            name="email"
+            placeholder="Your Email"
+            value={form.email}
+            onChange={onChange}
+            required
+          />
+          <input
+            className="border border-white/10 bg-white/5 text-gray-100 placeholder:text-gray-400 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-space-accent"
+            name="subject"
+            placeholder="Subject"
+            value={form.subject}
+            onChange={onChange}
+          />
+          <textarea
+            className="border border-white/10 bg-white/5 text-gray-100 placeholder:text-gray-400 rounded-xl p-3 min-h-[140px] focus:outline-none focus:ring-2 focus:ring-space-accent"
+            name="body"
+            placeholder="Your Message"
+            value={form.body}
+            onChange={onChange}
+            required
+          />
+
+          <button
+            type="submit"
+            className="btn w-fit disabled:opacity-70 disabled:cursor-not-allowed"
+            disabled={status === 'sending'}
+          >
+            {status === 'sending' ? 'Sending...' : 'Send Message'}
+          </button>
+
+          {status === 'ok' && (
+            <p className="text-green-400 animate-pulse">✅ Message sent! I’ll get back to you soon.</p>
+          )}
+          {status === 'error' && (
+            <p className="text-red-400">❌ Something went wrong. Please try again later.</p>
+          )}
         </form>
       </div>
+
+      {/* glowing overlay effect */}
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_50%_0%,rgba(122,162,255,0.15),transparent_70%)]" />
     </section>
   )
 }

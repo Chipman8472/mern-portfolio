@@ -2,9 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
-.container { @apply max-w-5xl mx-auto px-4; }
+/* Space theme variables */
+:root{
+  --space-bg:#0b1020;
+  --space-bg2:#0f1a3a;
+  --space-accent:#7aa2ff;
+  --space-accent2:#a78bfa;
+}
+
+html,body,#root{height:100%}
+html{background-color:var(--space-bg)}
+body{
+  /* subtle nebula gradients */
+  background-image:
+    radial-gradient(1200px 600px at 10% -10%, rgba(167,139,250,.25), transparent 40%),
+    radial-gradient(1000px 500px at 110% 0%, rgba(122,162,255,.20), transparent 35%);
+  color: #e5e7eb; /* gray-200 */
+}
+
+/* Starfield (three layers) */
+.space-stars,.space-stars2,.space-stars3{
+  position:fixed; inset:0; z-index:-1; background:transparent;
+  background-image:
+    radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+    radial-gradient(1px 1px at 130px 80px, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 70px 120px, #fff, transparent),
+    radial-gradient(1px 1px at 300px 200px, #fff, transparent),
+    radial-gradient(1px 1px at 500px 50px, #fff, transparent);
+  animation: twinkle 6s linear infinite;
+  opacity:.55
+}
+.space-stars2{animation-duration:9s; opacity:.35; filter:blur(.3px)}
+.space-stars3{animation-duration:12s; opacity:.25; filter:blur(.6px)}
+@keyframes twinkle{
+  0%,100%{opacity:.35; transform:translateY(0)}
+  50%{opacity:.75; transform:translateY(-0.6rem)}
+}
+
+/* Utility helpers used in components */
+.container { @apply max-w-6xl mx-auto px-4; }
 .section { @apply py-16; }
 .h1 { @apply text-4xl font-bold tracking-tight; }
 .h2 { @apply text-2xl font-semibold; }
-.card { @apply rounded-2xl shadow-sm bg-white border; }
-.btn { @apply inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition; }
+.card { @apply rounded-2xl border border-white/10 bg-white/5 backdrop-blur; }
+.btn { @apply inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--space-accent)] text-white hover:shadow-[0_0_30px_rgba(122,162,255,0.35)] transition; }
+.btn-secondary { @apply bg-[var(--space-accent2)] hover:shadow-[0_0_30px_rgba(167,139,250,0.35)]; }
